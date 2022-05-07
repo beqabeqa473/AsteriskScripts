@@ -1,0 +1,31 @@
+context radio {
+start => {
+Agi(radio.php,last);
+ConfBridge(radio,,radio,radio_menu);
+goto menu,s,1;
+}
+back => {
+Agi(radio.php,back);
+}
+search => {
+Agi(radio.php,search);
+}
+next => {
+Agi(radio.php,next);
+}
+	spkvolumeup => {
+Set(spkvolume=$[${spkvolume}+1]);
+		Set(VOLUME(TX)=${spkvolume});
+	Set(DB(spkvolume/${CALLERID(num)})=${spkvolume});
+	}
+		spkvolumedown => {
+Set(spkvolume=$[${spkvolume}-1]);
+		Set(VOLUME(TX)=${spkvolume});
+	Set(DB(spkvolume/${CALLERID(num)})=${spkvolume});
+}
+		spkvolumereset => {
+Set(spkvolume=0);
+		Set(VOLUME(TX)=${spkvolume});
+	Set(DB(spkvolume/${CALLERID(num)})=${spkvolume});
+}
+}
